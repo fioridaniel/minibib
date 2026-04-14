@@ -1,5 +1,3 @@
-from pathlib import Path
-
 class Catalogue:
     def __init__(self):
         self.inventory = {
@@ -12,22 +10,25 @@ class Catalogue:
     def query(self, arg):
         if isinstance(arg, int):
             if not (item := self.inventory.get(arg)):
-                return 'no matches for this query'
+                return None
             return item
 
         elif isinstance(arg, str):
             res = [
-                (item_number, arg) 
+                item_number
                 for item_number, details in self.inventory.items() 
                 if details.get("topic") == arg
             ]
 
-            return res if res else 'no matches for this query'
+            return res if res else None
     
     # atualiza o inventário atual de um item adicionando a quantidade especificada (positiva ou negativa).
     def update(self, item_number, qty): 
         if item_number not in self.inventory:
-            return 'iventario inexistente'
+            return False
         
-        self.inventory[item_number]["stock"] += qty
-        return 'iventario atualizado com sucesso'
+        curr_stock = self.inventory[item_number]["stock"]
+        
+        self.inventory[item_number]["stock"] = max(curr_stock + qty, 0)
+
+        return True

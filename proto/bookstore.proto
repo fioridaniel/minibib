@@ -1,0 +1,54 @@
+syntax = "proto3";
+// package = "proto";
+
+// chamado pelo front-end e pelo orders_server
+service CatalogueService {
+    rpc Query(QueryRequest) returns (QueryResponse);
+    rpc Update(UpdateRequest) returns (UpdateResponse);
+}
+
+// chamado pelo front-end
+// service OrdersService {
+//     rpc Buy(...) returns (...);
+// }
+
+// // chamado pelo cliente
+// service FrontendService {
+//     rpc Search(...) returns (...);
+//     rpc Lookup(...) returns (...);
+//     rpc Buy(...) returns (...);
+// }
+
+message QueryRequest {
+    string arg = 1;
+}
+
+message QueryResponse {
+    bool success = 1;
+    string error = 2;
+    // caso arg for um item_number, retorna isso:
+    string name = 3;
+    string topic = 4;
+    int32 stock = 5;
+    // caso arg for um topico (e.g romance), retorna isso:
+    repeated int32 item_numbers = 6;
+}
+
+message UpdateRequest {
+    int32 item_number = 1;
+    int32 qty = 2;
+}
+
+message UpdateResponse {
+    bool success = 1;
+    string error = 2;
+}
+
+message OrderRequest {
+    int32 item_number = 1;
+}
+
+message OrderResponse {
+    bool sucess = 1;
+    string error = 2;
+}
