@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0f\x62ookstore.proto\"\x1b\n\x0cQueryRequest\x12\x0b\n\x03\x61rg\x18\x01 \x01(\t\"q\n\rQueryResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05\x65rror\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\r\n\x05topic\x18\x04 \x01(\t\x12\r\n\x05stock\x18\x05 \x01(\x05\x12\x14\n\x0citem_numbers\x18\x06 \x03(\x05\"1\n\rUpdateRequest\x12\x13\n\x0bitem_number\x18\x01 \x01(\x05\x12\x0b\n\x03qty\x18\x02 \x01(\x05\"0\n\x0eUpdateResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05\x65rror\x18\x02 \x01(\t\"#\n\x0cOrderRequest\x12\x13\n\x0bitem_number\x18\x01 \x01(\x05\".\n\rOrderResponse\x12\x0e\n\x06sucess\x18\x01 \x01(\x08\x12\r\n\x05\x65rror\x18\x02 \x01(\t2e\n\x10\x43\x61talogueService\x12&\n\x05Query\x12\r.QueryRequest\x1a\x0e.QueryResponse\x12)\n\x06Update\x12\x0e.UpdateRequest\x1a\x0f.UpdateResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0f\x62ookstore.proto\"\x1b\n\x0cQueryRequest\x12\x0b\n\x03\x61rg\x18\x01 \x01(\t\"q\n\rQueryResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05\x65rror\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\r\n\x05topic\x18\x04 \x01(\t\x12\r\n\x05stock\x18\x05 \x01(\x05\x12\x14\n\x0citem_numbers\x18\x06 \x03(\x05\"1\n\rUpdateRequest\x12\x13\n\x0bitem_number\x18\x01 \x01(\x05\x12\x0b\n\x03qty\x18\x02 \x01(\x05\"0\n\x0eUpdateResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05\x65rror\x18\x02 \x01(\t\"#\n\x0cOrderRequest\x12\x13\n\x0bitem_number\x18\x01 \x01(\x05\".\n\rOrderResponse\x12\x0e\n\x06sucess\x18\x01 \x01(\x08\x12\r\n\x05\x65rror\x18\x02 \x01(\t2e\n\x10\x43\x61talogueService\x12&\n\x05Query\x12\r.QueryRequest\x1a\x0e.QueryResponse\x12)\n\x06Update\x12\x0e.UpdateRequest\x1a\x0f.UpdateResponse25\n\rOrdersService\x12$\n\x03\x42uy\x12\r.OrderRequest\x1a\x0e.OrderResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -35,4 +35,6 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_ORDERRESPONSE']._serialized_end=347
   _globals['_CATALOGUESERVICE']._serialized_start=349
   _globals['_CATALOGUESERVICE']._serialized_end=450
+  _globals['_ORDERSSERVICE']._serialized_start=452
+  _globals['_ORDERSSERVICE']._serialized_end=505
 # @@protoc_insertion_point(module_scope)
