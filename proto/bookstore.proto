@@ -7,10 +7,9 @@ service CatalogueService {
     rpc Update(UpdateRequest) returns (UpdateResponse);
 }
 
-// chamado pelo front-end
-// service OrdersService {
-//     rpc Buy(...) returns (...);
-// }
+service OrdersService {
+    rpc Buy(OrderRequest) returns (OrderResponse);
+}
 
 // // chamado pelo cliente
 // service FrontendService {
@@ -49,6 +48,6 @@ message OrderRequest {
 }
 
 message OrderResponse {
-    bool sucess = 1;
+    bool success = 1;
     string error = 2;
 }
