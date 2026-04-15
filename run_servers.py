@@ -29,7 +29,7 @@ def main():
     project_dir = os.path.dirname(os.path.abspath(__file__))
     os.chdir(project_dir)
     
-    print("\n1️⃣  Iniciando Servidor de Catálogo (porta 50051)...")
+    print("\n1 - Iniciando Servidor de Catálogo (porta 50051)...")
     threading.Thread(
         target=run_server,
         args=("backend/catalogue_server.py", ["50051"], "Catálogo"),
@@ -37,7 +37,7 @@ def main():
     ).start()
     time.sleep(2)
     
-    print("\n2️⃣  Iniciando Servidor de Pedidos (porta 50052)...")
+    print("\n2 - Iniciando Servidor de Pedidos (porta 50052)...")
     threading.Thread(
         target=run_server,
         args=("backend/orders_server.py", ["50052", "localhost:50051"], "Pedidos"),
@@ -45,7 +45,7 @@ def main():
     ).start()
     time.sleep(2)
     
-    print("\n3️⃣  Iniciando Servidor Front-end (porta 50050)...")
+    print("\n3 - Iniciando Servidor Front-end (porta 50050)...")
     threading.Thread(
         target=run_server,
         args=("frontend/frontend-server.py", ["50050", "localhost:50051", "localhost:50052"], "Frontend"),
@@ -56,10 +56,10 @@ def main():
     print("\n" + "="*60)
     print("TODOS OS SERVIDORES INICIADOS")
     print("="*60)
-    print("\n4️⃣  Para testar o cliente, execute em outro terminal:")
+    print("\n4 - Para testar o cliente, execute em outro terminal:")
     print(f"   cd {project_dir}")
     print("   python client/client.py localhost:50050")
-    print("\n✋ Pressione CTRL+C para parar os servidores\n")
+    print("\nPressione CTRL+C para parar os servidores\n")
     
     try:
         while True:

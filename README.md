@@ -214,24 +214,3 @@ oto/
 └── client/
     └── client.py                # Cliente CLI
 ```
-
-## Argumentos de Linha de Comando
-
-Servidor | Argumentos | Exemplo
----|---|---
-catalogue_server.py | <porta> | python catalogue_server.py 50051
-orders_server.py | <porta> <catalogue_host:porta> | python orders_server.py 50052 localhost:50051
-frontend-server.py | <porta> <catalogue_host:porta> <orders_host:porta> | python frontend-server.py 50050 localhost:50051 localhost:50052
-client.py | <frontend_host:porta> | python client.py localhost:50050
-
-## Conclusao
-
-Este projeto demonstra uma arquitetura robusta de sistema distribuído com:
-- Comunicacao via gRPC
-- Concorrência segura
-- Separacao clara de responsabilidades
-- Interface amigável ao usuário
-- Tratamento adequado de erros
-
-Desenvolvido como projeto de Sistemas Distribuídos
-Minibib.com - Sistema de livraria online

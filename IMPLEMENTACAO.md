@@ -98,7 +98,7 @@ cd c:\Faculdade\Sistemas Distribuidos\minibib\client
 python client.py localhost:50050
 ```
 
-Opcao 2: Usar script automático (em desenvolvimento)
+Opcao 2: Usar script automático
 ```bash
 cd c:\Faculdade\Sistemas Distribuidos\minibib
 python run_servers.py
