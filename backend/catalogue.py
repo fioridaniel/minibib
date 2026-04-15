@@ -32,3 +32,7 @@ class Catalogue:
         self.inventory[item_number]["stock"] = max(curr_stock + qty, 0)
 
         return True
+    
+    # retorna todos os livros do catálogo
+    def list_all(self):
+        return self.inventory

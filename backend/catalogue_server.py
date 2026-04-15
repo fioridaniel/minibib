@@ -1,5 +1,15 @@
+import grpc
+import sys
+import os
+from concurrent import futures
+
+# Adiciona path para proto
+proto_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'proto')
+sys.path.insert(0, proto_path)
+
 from catalogue import Catalogue
-from proto import bookstore_pb2, bookstore_pb2_grpc
+import bookstore_pb2
+import bookstore_pb2_grpc as bookstore_pb2_grpc
 
 class CatalogueServer(bookstore_pb2_grpc.CatalogueServiceServicer):
     def __init__(self):
@@ -46,3 +56,44 @@ class CatalogueServer(bookstore_pb2_grpc.CatalogueServiceServicer):
             success = False,
             error = 'item not found'
         )
+
+    def ListAll(self, request, context):
+        inventory = self.catalogue.list_all()
+        books = []
+        
+        for item_number, details in inventory.items():
+            book = bookstore_pb2.Book(
+                item_number=item_number,
+                name=details["name"],
+                topic=details["topic"],
+                stock=details["stock"]
+            )
+            books.append(book)
+        
+        return bookstore_pb2.ListAllResponse(
+            success=True,
+            books=books
+        )
+
+
+def main():
+    if len(sys.argv) < 2:
+        print("Uso: python catalogue_server.py <porta>")
+        print("Exemplo: python catalogue_server.py 50051")
+        sys.exit(1)
+    
+    port = sys.argv[1]
+    
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    bookstore_pb2_grpc.add_CatalogueServiceServicer_to_server(
+        CatalogueServer(), server
+    )
+    
+    server.add_insecure_port(f'[::]:{port}')
+    print(f"Servidor de Catalogo rodando na porta {port}...")
+    server.start()
+    server.wait_for_termination()
+
+
+if __name__ == '__main__':
+    main()

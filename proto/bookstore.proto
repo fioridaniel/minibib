@@ -5,18 +5,20 @@ syntax = "proto3";
 service CatalogueService {
     rpc Query(QueryRequest) returns (QueryResponse);
     rpc Update(UpdateRequest) returns (UpdateResponse);
+    rpc ListAll(ListAllRequest) returns (ListAllResponse);
 }
 
 service OrdersService {
     rpc Buy(OrderRequest) returns (OrderResponse);
 }
 
-// // chamado pelo cliente
-// service FrontendService {
-//     rpc Search(...) returns (...);
-//     rpc Lookup(...) returns (...);
-//     rpc Buy(...) returns (...);
-// }
+// chamado pelo cliente
+service FrontendService {
+    rpc Search(SearchRequest) returns (SearchResponse);
+    rpc Lookup(LookupRequest) returns (LookupResponse);
+    rpc Buy(BuyRequest) returns (BuyResponse);
+    rpc ListAll(ListAllRequest) returns (ListAllResponse);
+}
 
 message QueryRequest {
     string arg = 1;
@@ -50,4 +52,53 @@ message OrderRequest {
 message OrderResponse {
     bool success = 1;
     string error = 2;
+}
+
+// === Mensagens para FrontendService (cliente) ===
+
+message SearchRequest {
+    string topic = 1;
+}
+
+message SearchResponse {
+    bool success = 1;
+    string error = 2;
+    repeated int32 item_numbers = 3;
+}
+
+message LookupRequest {
+    int32 item_number = 1;
+}
+
+message LookupResponse {
+    bool success = 1;
+    string error = 2;
+    string name = 3;
+    string topic = 4;
+    int32 stock = 5;
+}
+
+message BuyRequest {
+    int32 item_number = 1;
+}
+
+message BuyResponse {
+    bool success = 1;
+    string error = 2;
+}
+
+message ListAllRequest {
+}
+
+message Book {
+    int32 item_number = 1;
+    string name = 2;
+    string topic = 3;
+    int32 stock = 4;
+}
+
+message ListAllResponse {
+    bool success = 1;
+    string error = 2;
+    repeated Book books = 3;
 }

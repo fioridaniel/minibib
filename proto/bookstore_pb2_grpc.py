@@ -5,10 +5,8 @@ import warnings
 
 import bookstore_pb2 as bookstore__pb2
 
-GRPC_GENERATED_VERSION = '1.64.0'
+GRPC_GENERATED_VERSION = '1.80.0'
 GRPC_VERSION = grpc.__version__
-EXPECTED_ERROR_RELEASE = '1.65.0'
-SCHEDULED_RELEASE_DATE = 'June 25, 2024'
 _version_not_supported = False
 
 try:
@@ -18,15 +16,12 @@ except ImportError:
     _version_not_supported = True
 
 if _version_not_supported:
-    warnings.warn(
+    raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in bookstore_pb2_grpc.py depends on'
+        + ' but the generated code in bookstore_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
-        + f' This warning will become an error in {EXPECTED_ERROR_RELEASE},'
-        + f' scheduled for release on {SCHEDULED_RELEASE_DATE}.',
-        RuntimeWarning
     )
 
 
@@ -50,6 +45,11 @@ class CatalogueServiceStub(object):
                 request_serializer=bookstore__pb2.UpdateRequest.SerializeToString,
                 response_deserializer=bookstore__pb2.UpdateResponse.FromString,
                 _registered_method=True)
+        self.ListAll = channel.unary_unary(
+                '/CatalogueService/ListAll',
+                request_serializer=bookstore__pb2.ListAllRequest.SerializeToString,
+                response_deserializer=bookstore__pb2.ListAllResponse.FromString,
+                _registered_method=True)
 
 
 class CatalogueServiceServicer(object):
@@ -68,6 +68,12 @@ class CatalogueServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListAll(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_CatalogueServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -80,6 +86,11 @@ def add_CatalogueServiceServicer_to_server(servicer, server):
                     servicer.Update,
                     request_deserializer=bookstore__pb2.UpdateRequest.FromString,
                     response_serializer=bookstore__pb2.UpdateResponse.SerializeToString,
+            ),
+            'ListAll': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListAll,
+                    request_deserializer=bookstore__pb2.ListAllRequest.FromString,
+                    response_serializer=bookstore__pb2.ListAllResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -137,6 +148,33 @@ class CatalogueService(object):
             '/CatalogueService/Update',
             bookstore__pb2.UpdateRequest.SerializeToString,
             bookstore__pb2.UpdateResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListAll(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/CatalogueService/ListAll',
+            bookstore__pb2.ListAllRequest.SerializeToString,
+            bookstore__pb2.ListAllResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -209,6 +247,210 @@ class OrdersService(object):
             '/OrdersService/Buy',
             bookstore__pb2.OrderRequest.SerializeToString,
             bookstore__pb2.OrderResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+
+class FrontendServiceStub(object):
+    """chamado pelo cliente
+    """
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.Search = channel.unary_unary(
+                '/FrontendService/Search',
+                request_serializer=bookstore__pb2.SearchRequest.SerializeToString,
+                response_deserializer=bookstore__pb2.SearchResponse.FromString,
+                _registered_method=True)
+        self.Lookup = channel.unary_unary(
+                '/FrontendService/Lookup',
+                request_serializer=bookstore__pb2.LookupRequest.SerializeToString,
+                response_deserializer=bookstore__pb2.LookupResponse.FromString,
+                _registered_method=True)
+        self.Buy = channel.unary_unary(
+                '/FrontendService/Buy',
+                request_serializer=bookstore__pb2.BuyRequest.SerializeToString,
+                response_deserializer=bookstore__pb2.BuyResponse.FromString,
+                _registered_method=True)
+        self.ListAll = channel.unary_unary(
+                '/FrontendService/ListAll',
+                request_serializer=bookstore__pb2.ListAllRequest.SerializeToString,
+                response_deserializer=bookstore__pb2.ListAllResponse.FromString,
+                _registered_method=True)
+
+
+class FrontendServiceServicer(object):
+    """chamado pelo cliente
+    """
+
+    def Search(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def Lookup(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def Buy(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListAll(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+
+def add_FrontendServiceServicer_to_server(servicer, server):
+    rpc_method_handlers = {
+            'Search': grpc.unary_unary_rpc_method_handler(
+                    servicer.Search,
+                    request_deserializer=bookstore__pb2.SearchRequest.FromString,
+                    response_serializer=bookstore__pb2.SearchResponse.SerializeToString,
+            ),
+            'Lookup': grpc.unary_unary_rpc_method_handler(
+                    servicer.Lookup,
+                    request_deserializer=bookstore__pb2.LookupRequest.FromString,
+                    response_serializer=bookstore__pb2.LookupResponse.SerializeToString,
+            ),
+            'Buy': grpc.unary_unary_rpc_method_handler(
+                    servicer.Buy,
+                    request_deserializer=bookstore__pb2.BuyRequest.FromString,
+                    response_serializer=bookstore__pb2.BuyResponse.SerializeToString,
+            ),
+            'ListAll': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListAll,
+                    request_deserializer=bookstore__pb2.ListAllRequest.FromString,
+                    response_serializer=bookstore__pb2.ListAllResponse.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'FrontendService', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+    server.add_registered_method_handlers('FrontendService', rpc_method_handlers)
+
+
+ # This class is part of an EXPERIMENTAL API.
+class FrontendService(object):
+    """chamado pelo cliente
+    """
+
+    @staticmethod
+    def Search(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/FrontendService/Search',
+            bookstore__pb2.SearchRequest.SerializeToString,
+            bookstore__pb2.SearchResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def Lookup(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/FrontendService/Lookup',
+            bookstore__pb2.LookupRequest.SerializeToString,
+            bookstore__pb2.LookupResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def Buy(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/FrontendService/Buy',
+            bookstore__pb2.BuyRequest.SerializeToString,
+            bookstore__pb2.BuyResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListAll(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/FrontendService/ListAll',
+            bookstore__pb2.ListAllRequest.SerializeToString,
+            bookstore__pb2.ListAllResponse.FromString,
             options,
             channel_credentials,
             insecure,
